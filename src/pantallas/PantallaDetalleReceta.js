@@ -1,4 +1,3 @@
-// src/screens/RecipeDetailScreen.js
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, Image, ScrollView, Button, StyleSheet } from 'react-native';
 import { fetchRecipeDetails } from '../api/spoonacular';
