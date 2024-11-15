@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, Image, ScrollView, Button, StyleSheet } from 'react-native';
 import { fetchRecipeDetails } from '../api/spoonacular';
-import {type} from '../components/RecipeCard';
 import { MenuContext } from '../context/MenuProvider';
 
 const RecipeDetailScreen = ({ route }) => {
@@ -11,8 +10,12 @@ const RecipeDetailScreen = ({ route }) => {
 
   useEffect(() => {
     const loadDetails = async () => {
-      const recipeDetails = await fetchRecipeDetails(recipe.id);
-      setDetails(recipeDetails);
+      try {
+        const recipeDetails = await fetchRecipeDetails(recipe.id);
+        setDetails(recipeDetails);
+      } catch (error) {
+        console.error('Error al cargar los detalles de la receta:', error);
+      }
     };
     loadDetails();
   }, [recipe.id]);
@@ -27,7 +30,9 @@ const RecipeDetailScreen = ({ route }) => {
           <Text style={styles.title}>{details.title}</Text>
           <Text style={styles.price}>Precio: ${details.pricePerServing?.toFixed(2) || 'N/A'}</Text>
           <Text style={styles.healthScore}>Health Score: {details.healthScore || 'N/A'}</Text>
-          <Text style={styles.vegan}>{type}</Text>
+          <Text style={styles.vegan}>
+            Es vegano: {details.vegan ? 'Sí' : 'No'}
+          </Text>
           <Text style={styles.description}>
             {details.summary?.replace(/<[^>]*>/g, '') || 'Sin descripción'}
           </Text>
