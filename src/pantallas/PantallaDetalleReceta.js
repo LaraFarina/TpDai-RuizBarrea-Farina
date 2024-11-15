@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, Image, ScrollView, Button, StyleSheet } from 'react-native';
 import { fetchRecipeDetails } from '../api/spoonacular';
+import {type} from '../components/RecipeCard';
 import { MenuContext } from '../context/MenuProvider';
 
 const RecipeDetailScreen = ({ route }) => {
@@ -26,6 +27,7 @@ const RecipeDetailScreen = ({ route }) => {
           <Text style={styles.title}>{details.title}</Text>
           <Text style={styles.price}>Precio: ${details.pricePerServing?.toFixed(2) || 'N/A'}</Text>
           <Text style={styles.healthScore}>Health Score: {details.healthScore || 'N/A'}</Text>
+          <Text style={styles.vegan}>{type}</Text>
           <Text style={styles.description}>
             {details.summary?.replace(/<[^>]*>/g, '') || 'Sin descripción'}
           </Text>
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
   price: { fontSize: 18, color: '#333', marginBottom: 5 },
   healthScore: { fontSize: 16, marginBottom: 5 },
+  vegan: { fontSize: 16, marginBottom: 5 },
   description: { fontSize: 16, lineHeight: 24, marginBottom: 10 },
 });
 

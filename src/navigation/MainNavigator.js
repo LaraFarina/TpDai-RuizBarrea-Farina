@@ -12,8 +12,8 @@ const MainNavigator = () => (
   <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen name="Menu" component={Menu} options={{ title: 'Menú' }} />
-      <Stack.Screen name="Buscar" component={BusquedaReceta} options={{ title: 'Buscar Recetas' }} />
-      <Stack.Screen name="Detalle" component={DetalleReceta} options={{ title: 'Detalles de la Receta' }} />
+      <Stack.Screen name="Search" component={BusquedaReceta} options={{ title: 'Buscar Recetas' }} />
+      <Stack.Screen name="Detail" component={DetalleReceta} options={{ title: 'Detalles de la Receta' }} />
     </Stack.Navigator>
   </NavigationContainer>
 );

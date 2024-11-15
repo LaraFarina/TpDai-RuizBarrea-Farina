@@ -24,7 +24,6 @@ const MenuScreen = () => {
     );
   };
 
-  // Función para ver detalles de la receta
   const handleViewDetails = (recipe) => {
     navigation.navigate('Detail', { recipe });
   };
@@ -38,7 +37,12 @@ const MenuScreen = () => {
         <Text style={styles.stat}>Total Cost: ${totalCost.toFixed(2)}</Text>
       </View>
 
-      <Button title="Buscar Recetas" onPress={goToSearchScreen} />
+      <Button 
+        title="Buscar Recetas" 
+        onPress={goToSearchScreen} 
+        color="#6200ee" 
+        style={styles.searchButton} 
+      />
 
       {selectedRecipes.length > 0 ? (
         <FlatList
@@ -47,7 +51,7 @@ const MenuScreen = () => {
           renderItem={({ item }) => (
             <RecipeCard
               recipe={item}
-              onDetailsPress={() => handleViewDetails(item)} // Pasamos la función handleViewDetails
+              onDetailsPress={() => handleViewDetails(item)} 
               onToggleMenu={() => confirmRemoveRecipe(item)}
               includedInMenu={true}
             />
@@ -63,11 +67,40 @@ const MenuScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10 },
-  statsContainer: { marginBottom: 20 },
-  stat: { fontSize: 16, marginBottom: 5 },
-  emptyContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  emptyText: { fontSize: 18, color: '#888' },
+  container: { 
+    flex: 1, 
+    padding: 20, 
+    backgroundColor: '#f9f9f9' 
+  },
+  statsContainer: { 
+    marginBottom: 20, 
+    padding: 15, 
+    backgroundColor: '#fff', 
+    borderRadius: 8, 
+    shadowColor: '#000', 
+    shadowOpacity: 0.1, 
+    shadowRadius: 10, 
+    elevation: 3,
+  },
+  stat: { 
+    fontSize: 16, 
+    color: '#333', 
+    marginBottom: 5 
+  },
+  emptyContainer: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  emptyText: { 
+    fontSize: 18, 
+    color: '#888' 
+  },
+  searchButton: {
+    marginTop: 10, 
+    borderRadius: 5, 
+    overflow: 'hidden', 
+  },
 });
 
 export default MenuScreen;
