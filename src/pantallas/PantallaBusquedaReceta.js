@@ -1,5 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { View, TextInput, FlatList, StyleSheet, Button, Alert } from 'react-native';
+import {
+  View,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from 'react-native';
 import { searchRecipes } from '../api/spoonacular';
 import { MenuContext } from '../context/MenuProvider';
 import RecipeCard from '../components/RecipeCard';
@@ -15,6 +23,8 @@ const RecipeSearchScreen = () => {
     if (searchQuery.length > 2) {
       const results = await searchRecipes(searchQuery);
       setRecipes(results);
+    } else {
+      Alert.alert('Error', 'Escribe al menos 3 caracteres para buscar.');
     }
   };
 
@@ -22,14 +32,13 @@ const RecipeSearchScreen = () => {
     navigation.navigate('Detail', { recipe });
   };
 
-  // Función para confirmar la eliminación de una receta
   const confirmRemoveRecipe = (recipe) => {
     Alert.alert(
-      "Eliminar receta",
+      'Eliminar receta',
       `¿Estás seguro de que deseas eliminar ${recipe.title} del menú?`,
       [
-        { text: "Cancelar", style: "cancel" },
-        { text: "Eliminar", onPress: () => removeRecipe(recipe) }
+        { text: 'Cancelar', style: 'cancel' },
+        { text: 'Eliminar', onPress: () => removeRecipe(recipe) },
       ]
     );
   };
@@ -43,8 +52,11 @@ const RecipeSearchScreen = () => {
         onChangeText={setSearchQuery}
         onSubmitEditing={onSearch}
       />
-      <Button title="Buscar" onPress={onSearch} />
+      <TouchableOpacity style={styles.button} onPress={onSearch}>
+        <Text style={styles.buttonText}>Buscar</Text>
+      </TouchableOpacity>
       <FlatList
+        style={styles.recipeList}
         data={recipes}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => {
@@ -56,9 +68,9 @@ const RecipeSearchScreen = () => {
               onDetailsPress={() => navigateToDetails(item)}
               onToggleMenu={() => {
                 if (isInMenu) {
-                  confirmRemoveRecipe(item); // Confirmación de eliminación
+                  confirmRemoveRecipe(item);
                 } else {
-                  addRecipe(item); // Agregar sin límite en RecipeSearchScreen
+                  addRecipe(item);
                 }
               }}
               includedInMenu={isInMenu}
@@ -71,8 +83,35 @@ const RecipeSearchScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10 },
-  input: { borderWidth: 1, borderColor: '#ddd', padding: 8, borderRadius: 5, marginBottom: 10 },
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#f4f4f9',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    fontSize: 16,
+    backgroundColor: '#ffffff',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  recipeList: {
+    marginTop: 10,
+  },
 });
 
 export default RecipeSearchScreen;

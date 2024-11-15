@@ -23,28 +23,39 @@ const RecipeCard = ({ recipe, onDetailsPress, onToggleMenu, includedInMenu }) =>
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',        // Coloca los elementos en línea horizontal
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 8,
+    flexDirection: 'row',
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: '#ffffff', // Un color blanco para destacar el contenido
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 }, // Agrega una ligera sombra para realce
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3, // Sombra para dispositivos Android
     alignItems: 'center',
-    justifyContent: 'space-between', // Asegura que el contenido esté espaciado
   },
   infoContainer: {
     flex: 1,
-    paddingRight: 10,            // Añade espacio entre el texto y la imagen
+    marginRight: 12, // Espacio más amplio entre texto e imagen
   },
   title: {
-    fontSize: 16,
+    fontSize: 18, // Tamaño de fuente más grande para mejor lectura
     fontWeight: 'bold',
-    marginBottom: 5,
+    color: '#333', // Color oscuro para buen contraste
+    marginBottom: 8,
   },
   thumbnail: {
-    width: 60,                   // Ajusta el ancho de la imagen según sea necesario
-    height: 60,
-    borderRadius: 8,
+    width: 70, // Tamaño más destacado para la miniatura
+    height: 70,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ddd', // Borde para un look más refinado
+  },
+  button: {
+    marginTop: 6, // Espaciado entre botones
   },
 });
+
 
 export default RecipeCard;
